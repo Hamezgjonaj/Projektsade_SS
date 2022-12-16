@@ -1,0 +1,95 @@
+.dropdown {
+    /* height: 10px; */
+    border-radius: 8px;
+    padding: 10px;
+    margin: 0px;
+    cursor: pointer;
+    border-style: groove;
+  }
+
+  .addBtn {
+    height: 40px;
+    border-radius: 8px;
+    padding: 10px 25px;
+    background-color: #2c63b0;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+  }
+
+  .custom-input {
+    height: 14px;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .list-element {
+    border: outset;
+    width: inherit;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .user-container {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+  }
+
+  .user-info {
+    padding-left: 15px;
+  }
+
+  .user-name {
+    font-size: 20px;
+  }
+
+  .user-role {
+    font-weight: bold;
+  }
+
+  .user-image {
+    width: 40px;
+    border-style: solid;
+    border-radius: 100px;
+    border-width: thin;
+  }
+
+  .close {
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10px;
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 40px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 40px;
+    background-color: red;
+  }
+
+  .close::after,
+.close::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 25px;
+    height: 5px;
+    background: currentColor;
+    transform: rotate(45deg);
+    top: 15px;
+    left: 6px;
+    background-color: white;
+}
+
+.close::after {
+    transform: rotate(-45deg)
+}
