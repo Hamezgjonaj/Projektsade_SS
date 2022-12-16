@@ -3,19 +3,27 @@ var i;
 var selectedRole = "Student";
 var userList = [];
 var filteredList = [];
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    var div = this.parentElement;
-    div.style.display = "none";
-  };
+
+function startUp() {
+  var test = localStorage.getItem("UserList");
+  var existingList = JSON.parse(test);
+  if (existingList.length > 0) {
+    this.userList = existingList;
+    this.showList(this.userList)
+  }
 }
 
 function newElement() {
-  this.userList.push({
-    name: document.getElementById("myInput").value,
-    role: this.selectedRole,
-  });
-  this.showList(this.userList);
+  if (document.getElementById("myInput").value == "") {
+    alert("You must write something!");
+  } else {
+    this.userList.push({
+      name: document.getElementById("myInput").value,
+      role: this.selectedRole,
+    });
+    localStorage.setItem("UserList", JSON.stringify(this.userList));
+    this.showList(this.userList);
+  }
 }
 
 function showList(list) {
@@ -24,7 +32,7 @@ function showList(list) {
     var li = document.createElement("li");
     li.classList.add("list-element");
     var inputValue = element.name;
-    var role = element.role;
+    // var role = element.role;
     var t = document.createElement("div");
     t.classList.add("user-container");
     var userImage = document.createElement("img");
@@ -36,11 +44,12 @@ function showList(list) {
     userInfo.classList.add("user-info");
     var userName = document.createElement("div");
     userName.classList.add("user-name");
+    userName.id = "current";
     userName.innerHTML += inputValue;
     userInfo.appendChild(userName);
     var userRole = document.createElement("div");
     userRole.classList.add("user-role");
-    userRole.innerHTML += role;
+    userRole.innerHTML += element.role;
     userInfo.appendChild(userRole);
     t.appendChild(userInfo);
     li.appendChild(t);
@@ -51,31 +60,22 @@ function showList(list) {
     }
     document.getElementById("myInput").value = "";
 
-    var span = document.createElement("span");
+    var span = document.createElement("div");
     span.className = "close";
+    span.setAttribute("data-index", list.indexOf(element));
     li.appendChild(span);
 
     for (i = 0; i < close.length; i++) {
       close[i].onclick = function () {
+        var itemIndex = this.getAttribute("data-index");
+        list.splice(itemIndex, 1);
+        localStorage.setItem("UserList", JSON.stringify(list));
         var div = this.parentElement;
         div.style.display = "none";
       };
     }
   });
 }
-
-window.onclick = function (event) {
-  if (!event.target.matches(".dropbtn")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
-  }
-};
 
 function selectRole(role) {
   this.selectedRole = role;
